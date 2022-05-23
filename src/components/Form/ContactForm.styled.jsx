@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  background-color: #f4f6f8;
+  background-color: #da593e;
   padding: 20px;
   font-size: 20px;
+  border-radius: 10px;
 `;
 
 export const Button = styled.button`
   display: block;
-  margin-top: 40px;
-  margin-left: 30px;
+  margin: 40px auto 30px auto;
 `;

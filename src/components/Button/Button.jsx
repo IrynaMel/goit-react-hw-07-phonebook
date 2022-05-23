@@ -1,14 +1,21 @@
 import PropTypes from 'prop-types';
 import Buttons from './Button.styled';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/sliceContact';
+import { useDeleteContactMutation } from 'redux/Contact';
+import ClipLoader from 'react-spinners/ClipLoader';
+
+const override = {
+  display: 'block',
+  margin: '0 auto',
+  height: '10px',
+  width: '10px',
+};
 
 const Button = ({ id }) => {
-  const dispatch = useDispatch();
+  const [deleteContact, { isLoading }] = useDeleteContactMutation();
 
   return (
-    <Buttons type="button" onClick={() => dispatch(deleteContact(id))}>
-      Delete
+    <Buttons type="button" onClick={() => deleteContact(id)}>
+      {isLoading ? <ClipLoader css={override} /> : <span>Delete</span>}
     </Buttons>
   );
 };

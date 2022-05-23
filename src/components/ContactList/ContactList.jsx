@@ -1,30 +1,34 @@
 import PropTypes from 'prop-types';
-import Li from './ContactList.styled';
+import { Li, Div } from './ContactList.styled';
 import Button from 'components/Button/Button';
-import { useSelector } from 'react-redux';
+import { useGetContactsQuery } from 'redux/Contact';
+import ClipLoader from 'react-spinners/ClipLoader';
 
-const ContactList = () => {
-  const contacts = useSelector(state => state.item.contacts);
-  const filter = useSelector(state => state.filter);
+const ContactList = ({ filter }) => {
+  const { data, isLoading } = useGetContactsQuery();
 
-  const visible = contacts.filter(contact =>
+  const visible = data?.filter(contact =>
     contact.name.toLowerCase().includes(filter)
   );
 
   return (
-    <div>
-      <ul>
-        {visible.map(({ id, name, number }) => (
-          <Li key={id}>
-            <p>
-              {' '}
-              {name}: {number}{' '}
-            </p>
-            <Button id={id} />
-          </Li>
-        ))}
-      </ul>
-    </div>
+    <Div>
+      {isLoading && <ClipLoader />}
+      {data && (
+        <ul>
+          {visible.map(({ id, name, phone }) => (
+            <Li key={id}>
+              <p>
+                {' '}
+                {name}: {phone}{' '}
+              </p>
+              <Button id={id} />
+            </Li>
+          ))}
+        </ul>
+      )}
+      {visible?.length === 0 && <p>no contacts</p>}
+    </Div>
   );
 };
 

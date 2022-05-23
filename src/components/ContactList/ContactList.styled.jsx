@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Li = styled.li`
+export const Li = styled.li`
   margin: 20px 0px;
   height: 20px;
   font-size: 20px;
@@ -8,4 +8,9 @@ const Li = styled.li`
   align-items: center;
 `;
 
-export default Li;
+export const Div = styled.div`
+  margin-top: 20px;
+  text-align: center;
+`;
+
+//
