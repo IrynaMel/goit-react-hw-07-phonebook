@@ -1,11 +1,13 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Li, Div } from './ContactList.styled';
 import Button from 'components/Button/Button';
 import { useGetContactsQuery } from 'redux/Contact';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { useSelector } from 'react-redux';
 
-const ContactList = ({ filter }) => {
+const ContactList = () => {
   const { data, isLoading } = useGetContactsQuery();
+  const filter = useSelector(state => state.filter);
 
   const visible = data?.filter(contact =>
     contact.name.toLowerCase().includes(filter)
@@ -32,8 +34,8 @@ const ContactList = ({ filter }) => {
   );
 };
 
-ContactList.propTypes = {
-  visible: PropTypes.array,
-};
+// ContactList.propTypes = {
+//   visible: PropTypes.array,
+// };
 
 export default ContactList;

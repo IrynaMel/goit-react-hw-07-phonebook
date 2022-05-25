@@ -1,6 +1,15 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { myFilter } from 'redux/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Filter = ({ filter, onChange }) => {
+const Filter = () => {
+  const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
+
+  const onFilter = e => {
+    dispatch(myFilter(e.currentTarget.value.trim().toLowerCase()));
+  };
+
   return (
     <div>
       <p>Find contacts by name</p>
@@ -11,15 +20,15 @@ const Filter = ({ filter, onChange }) => {
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
         value={filter}
-        onChange={e => onChange(e.target.value.toLowerCase())}
+        onChange={onFilter}
       />
     </div>
   );
 };
 
-Filter.propTypes = {
-  filter: PropTypes.string,
-  onChange: PropTypes.func,
-};
+// Filter.propTypes = {
+//   filter: PropTypes.string,
+//   onChange: PropTypes.func,
+// };
 
 export default Filter;
